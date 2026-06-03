@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies · Hannah Mickelson Marketing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --parchment: #EDE6D6;
+    --espresso: #2C1F14;
+    --taupe: #8C7B6B;
+    --warm-gold: #C4A55A;
+    --light-taupe: #BFB3A4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--espresso); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; background: rgba(245,240,232,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(140,123,107,0.15); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); text-decoration: none; }
+  .nav-back { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--espresso); }
+
+  .hero { padding: 160px 60px 80px; border-bottom: 1px solid var(--light-taupe); }
+  .eyebrow { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 0.95; color: var(--espresso); margin-bottom: 28px; }
+  .hero-title em { font-style: italic; color: var(--taupe); }
+  .hero-sub { max-width: 520px; font-size: 0.92rem; line-height: 1.8; color: var(--taupe); }
+
+  .case-study { padding: 100px 60px; }
+  .client-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--light-taupe); }
+  .client-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300; color: var(--espresso); line-height: 1.05; margin-bottom: 10px; }
+  .client-handle { font-size: 0.82rem; color: var(--taupe); margin-bottom: 16px; }
+  .client-handle a { color: var(--warm-gold); text-decoration: none; }
+  .client-bio { max-width: 580px; font-size: 0.88rem; line-height: 1.8; color: var(--taupe); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 80px; }
+  .stat-card { background: var(--parchment); padding: 36px 28px; transition: background 0.3s; }
+  .stat-card:hover { background: var(--cream); }
+  .stat-label { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--taupe); margin-bottom: 12px; }
+  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--espresso); line-height: 1; margin-bottom: 6px; }
+  .stat-value.gold { color: var(--warm-gold); }
+  .stat-note { font-size: 0.7rem; color: var(--light-taupe); line-height: 1.4; }
+
+  .section-label { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 300; color: var(--espresso); margin-bottom: 32px; }
+
+  /* PLATFORM TABS */
+  .platform-tabs { display: flex; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .platform-tab { flex: 1; padding: 16px; text-align: center; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); cursor: pointer; background: var(--parchment); transition: all 0.2s; border: none; font-family: 'Outfit', sans-serif; }
+  .platform-tab:hover { background: var(--cream); color: var(--espresso); }
+  .platform-tab.active { background: var(--espresso); color: var(--warm-gold); }
+
+  .platform-section { display: none; }
+  .platform-section.active { display: block; }
+
+  /* METRICS GRID */
+  .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .metric-card { background: var(--parchment); padding: 28px 24px; transition: background 0.3s; }
+  .metric-card:hover { background: var(--cream); }
+  .metric-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--taupe); margin-bottom: 8px; }
+  .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--espresso); line-height: 1; margin-bottom: 4px; }
+  .metric-value.gold { color: var(--warm-gold); }
+  .metric-change { font-size: 0.68rem; color: var(--warm-gold); }
+
+  /* BAR CHART */
+  .chart-section { margin-bottom: 60px; }
+  .chart-wrap { background: var(--espresso); padding: 40px 48px; overflow: hidden; position: relative; }
+  .chart-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: var(--cream); margin-bottom: 4px; }
+  .chart-sub { font-size: 0.7rem; color: var(--light-taupe); margin-bottom: 36px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 140px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+  .bar { width: 100%; background: rgba(196,165,90,0.28); border-radius: 2px 2px 0 0; position: relative; transition: background 0.3s; min-height: 4px; }
+  .bar:hover { background: var(--warm-gold); }
+  .bar-val { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--warm-gold); white-space: nowrap; }
+  .bar-label { font-size: 0.58rem; color: var(--light-taupe); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+  /* TOP POSTS */
+  .top-posts-section { margin-bottom: 60px; }
+  .top-posts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); }
+  .top-post-card { background: var(--parchment); padding: 28px 24px; transition: background 0.3s; }
+  .top-post-card:hover { background: var(--cream); }
+  .top-post-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--espresso); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--light-taupe); }
+  .top-post-stats { display: flex; flex-direction: column; gap: 8px; }
+  .top-post-stat { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--taupe); }
+  .top-post-stat strong { color: var(--espresso); font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+
+  /* INTERACTION BREAKDOWN */
+  .interaction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .interaction-card { background: var(--parchment); padding: 28px 24px; }
+  .interaction-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 12px; }
+  .interaction-items { display: flex; flex-direction: column; gap: 8px; }
+  .interaction-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--taupe); padding: 6px 0; border-bottom: 1px solid rgba(191,179,164,0.2); }
+  .interaction-item:last-child { border-bottom: none; }
+  .interaction-item strong { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--warm-gold); }
+
+  /* CONTENT TYPE BAR */
+  .content-type-bar { margin-bottom: 6px; }
+  .content-type-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .content-type-label { font-size: 0.75rem; color: var(--taupe); width: 80px; flex-shrink: 0; }
+  .content-bar-track { flex: 1; height: 6px; background: rgba(191,179,164,0.25); border-radius: 3px; overflow: hidden; }
+  .content-bar-fill { height: 100%; background: var(--warm-gold); border-radius: 3px; }
+  .content-pct { font-size: 0.72rem; color: var(--warm-gold); width: 40px; text-align: right; flex-shrink: 0; }
+
+  /* BREAKDOWN CARDS */
+  .breakdown-section { margin-bottom: 40px; }
+  .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); }
+  .breakdown-card { background: var(--parchment); padding: 34px 30px; transition: background 0.3s; }
+  .breakdown-card:hover { background: var(--cream); }
+  .breakdown-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 10px; }
+  .breakdown-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--espresso); margin-bottom: 9px; }
+  .breakdown-desc { font-size: 0.84rem; line-height: 1.7; color: var(--taupe); }
+
+  /* MORE */
+  .more-section { padding: 80px 60px; background: var(--espresso); text-align: center; }
+  .more-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 14px; line-height: 1.1; }
+  .more-title em { font-style: italic; color: var(--light-taupe); }
+  .more-sub { font-size: 0.87rem; color: var(--light-taupe); max-width: 400px; margin: 0 auto 32px; line-height: 1.7; }
+  .client-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .chip { padding: 7px 18px; border: 1px solid rgba(196,165,90,0.25); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-taupe); }
+  .btn-outline { display: inline-block; padding: 14px 40px; border: 1px solid var(--warm-gold); color: var(--warm-gold); font-family: 'Outfit', sans-serif; font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-outline:hover { background: var(--warm-gold); color: var(--espresso); }
+
+  footer { padding: 40px 60px; background: var(--espresso); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.07); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--cream); }
+  .footer-copy { font-size: 0.7rem; color: var(--taupe); }
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--light-taupe), transparent); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .hero, .case-study, .more-section { padding-left: 24px; padding-right: 24px; }
+    .stat-grid, .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .top-posts-grid, .breakdown-grid, .interaction-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 10px; padding: 32px 24px; }
+    .chart-wrap { padding: 24px; }
+    .platform-tab { font-size: 0.6rem; padding: 12px 8px; }
+  }
+</style><style>
+  :root {
+    --cream: #F5F0E8;
+    --parchment: #EDE6D6;
+    --espresso: #2C1F14;
+    --taupe: #8C7B6B;
+    --warm-gold: #C4A55A;
+    --light-taupe: #BFB3A4;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--cream); color: var(--espresso); font-family: 'Outfit', sans-serif; font-weight: 300; overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; background: rgba(245,240,232,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(140,123,107,0.15); }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--espresso); text-decoration: none; }
+  .nav-back { font-size: 0.75rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--taupe); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--espresso); }
+
+  .hero { padding: 160px 60px 80px; border-bottom: 1px solid var(--light-taupe); }
+  .eyebrow { font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.5rem, 7vw, 7rem); font-weight: 300; line-height: 0.95; color: var(--espresso); margin-bottom: 28px; }
+  .hero-title em { font-style: italic; color: var(--taupe); }
+  .hero-sub { max-width: 520px; font-size: 0.92rem; line-height: 1.8; color: var(--taupe); }
+
+  .case-study { padding: 100px 60px; }
+  .client-header { margin-bottom: 56px; padding-bottom: 40px; border-bottom: 1px solid var(--light-taupe); }
+  .client-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 300; color: var(--espresso); line-height: 1.05; margin-bottom: 10px; }
+  .client-handle { font-size: 0.82rem; color: var(--taupe); margin-bottom: 16px; }
+  .client-handle a { color: var(--warm-gold); text-decoration: none; }
+  .client-bio { max-width: 580px; font-size: 0.88rem; line-height: 1.8; color: var(--taupe); }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 80px; }
+  .stat-card { background: var(--parchment); padding: 36px 28px; transition: background 0.3s; }
+  .stat-card:hover { background: var(--cream); }
+  .stat-label { font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--taupe); margin-bottom: 12px; }
+  .stat-value { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--espresso); line-height: 1; margin-bottom: 6px; }
+  .stat-value.gold { color: var(--warm-gold); }
+  .stat-note { font-size: 0.7rem; color: var(--light-taupe); line-height: 1.4; }
+
+  .section-label { font-size: 0.63rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem,3vw,2.6rem); font-weight: 300; color: var(--espresso); margin-bottom: 32px; }
+
+  /* PLATFORM TABS */
+  .platform-tabs { display: flex; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .platform-tab { flex: 1; padding: 16px; text-align: center; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); cursor: pointer; background: var(--parchment); transition: all 0.2s; border: none; font-family: 'Outfit', sans-serif; }
+  .platform-tab:hover { background: var(--cream); color: var(--espresso); }
+  .platform-tab.active { background: var(--espresso); color: var(--warm-gold); }
+
+  .platform-section { display: none; }
+  .platform-section.active { display: block; }
+
+  /* METRICS GRID */
+  .metrics-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .metric-card { background: var(--parchment); padding: 28px 24px; transition: background 0.3s; }
+  .metric-card:hover { background: var(--cream); }
+  .metric-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--taupe); margin-bottom: 8px; }
+  .metric-value { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; font-weight: 300; color: var(--espresso); line-height: 1; margin-bottom: 4px; }
+  .metric-value.gold { color: var(--warm-gold); }
+  .metric-change { font-size: 0.68rem; color: var(--warm-gold); }
+
+  /* BAR CHART */
+  .chart-section { margin-bottom: 60px; }
+  .chart-wrap { background: var(--espresso); padding: 40px 48px; overflow: hidden; position: relative; }
+  .chart-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: var(--cream); margin-bottom: 4px; }
+  .chart-sub { font-size: 0.7rem; color: var(--light-taupe); margin-bottom: 36px; }
+  .bar-chart { display: flex; align-items: flex-end; gap: 12px; height: 140px; }
+  .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
+  .bar { width: 100%; background: rgba(196,165,90,0.28); border-radius: 2px 2px 0 0; position: relative; transition: background 0.3s; min-height: 4px; }
+  .bar:hover { background: var(--warm-gold); }
+  .bar-val { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--warm-gold); white-space: nowrap; }
+  .bar-label { font-size: 0.58rem; color: var(--light-taupe); text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+  /* TOP POSTS */
+  .top-posts-section { margin-bottom: 60px; }
+  .top-posts-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); }
+  .top-post-card { background: var(--parchment); padding: 28px 24px; transition: background 0.3s; }
+  .top-post-card:hover { background: var(--cream); }
+  .top-post-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--espresso); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--light-taupe); }
+  .top-post-stats { display: flex; flex-direction: column; gap: 8px; }
+  .top-post-stat { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--taupe); }
+  .top-post-stat strong { color: var(--espresso); font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+
+  /* INTERACTION BREAKDOWN */
+  .interaction-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); margin-bottom: 60px; }
+  .interaction-card { background: var(--parchment); padding: 28px 24px; }
+  .interaction-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 12px; }
+  .interaction-items { display: flex; flex-direction: column; gap: 8px; }
+  .interaction-item { display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--taupe); padding: 6px 0; border-bottom: 1px solid rgba(191,179,164,0.2); }
+  .interaction-item:last-child { border-bottom: none; }
+  .interaction-item strong { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; color: var(--warm-gold); }
+
+  /* CONTENT TYPE BAR */
+  .content-type-bar { margin-bottom: 6px; }
+  .content-type-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .content-type-label { font-size: 0.75rem; color: var(--taupe); width: 80px; flex-shrink: 0; }
+  .content-bar-track { flex: 1; height: 6px; background: rgba(191,179,164,0.25); border-radius: 3px; overflow: hidden; }
+  .content-bar-fill { height: 100%; background: var(--warm-gold); border-radius: 3px; }
+  .content-pct { font-size: 0.72rem; color: var(--warm-gold); width: 40px; text-align: right; flex-shrink: 0; }
+
+  /* BREAKDOWN CARDS */
+  .breakdown-section { margin-bottom: 40px; }
+  .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--light-taupe); border: 1px solid var(--light-taupe); }
+  .breakdown-card { background: var(--parchment); padding: 34px 30px; transition: background 0.3s; }
+  .breakdown-card:hover { background: var(--cream); }
+  .breakdown-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--warm-gold); margin-bottom: 10px; }
+  .breakdown-title { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; color: var(--espresso); margin-bottom: 9px; }
+  .breakdown-desc { font-size: 0.84rem; line-height: 1.7; color: var(--taupe); }
+
+  /* MORE */
+  .more-section { padding: 80px 60px; background: var(--espresso); text-align: center; }
+  .more-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem,4vw,3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 14px; line-height: 1.1; }
+  .more-title em { font-style: italic; color: var(--light-taupe); }
+  .more-sub { font-size: 0.87rem; color: var(--light-taupe); max-width: 400px; margin: 0 auto 32px; line-height: 1.7; }
+  .client-chips { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 40px; }
+  .chip { padding: 7px 18px; border: 1px solid rgba(196,165,90,0.25); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-taupe); }
+  .btn-outline { display: inline-block; padding: 14px 40px; border: 1px solid var(--warm-gold); color: var(--warm-gold); font-family: 'Outfit', sans-serif; font-size: 0.74rem; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: all 0.3s; }
+  .btn-outline:hover { background: var(--warm-gold); color: var(--espresso); }
+
+  footer { padding: 40px 60px; background: var(--espresso); display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.07); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; color: var(--cream); }
+  .footer-copy { font-size: 0.7rem; color: var(--taupe); }
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--light-taupe), transparent); }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .hero, .case-study, .more-section { padding-left: 24px; padding-right: 24px; }
+    .stat-grid, .metrics-grid { grid-template-columns: 1fr 1fr; }
+    .top-posts-grid, .breakdown-grid, .interaction-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 10px; padding: 32px 24px; }
+    .chart-wrap { padding: 24px; }
+    .platform-tab { font-size: 0.6rem; padding: 12px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Hannah Mickelson Marketing</a>
+  <a href="index.html" class="nav-back">← Back to Home</a>
+</nav>
+
+<section class="hero">
+  <p class="eyebrow">Real Results · Real Clients</p>
+  <h1 class="hero-title"><span style="color:var(--warm-gold)">Case </span><em style="color:var(--warm-gold)">Studies.</em></h1>
+  <p class="hero-sub">Real analytics from real campaigns. Every number here came directly from client reporting, no estimates, no fluff.</p>
+</section>
+
+<div class="divider"></div>
+
+<section class="case-study">
+
+  <div class="client-header">
+    <p class="eyebrow">Client · Nonprofit · Phoenix, AZ</p>
+    <h2 class="client-name">Phoenix 2030 Club</h2>
+    <p class="client-handle">Instagram: <a href="https://www.instagram.com/phoenix2030club/" target="_blank" rel="noopener">@phoenix2030club</a></p>
+    <p class="client-bio">The Active 20-30 Club of Phoenix is one of the oldest and most active young professional service organizations in the country, est. 1932. We manage their full Instagram and LinkedIn presence, growing their reach, driving event attendance, and building a community around charitable impact.</p>
+  </div>
+
+  <!-- OVERVIEW STATS -->
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-label">Instagram Followers</div>
+      <div class="stat-value gold">2,859</div>
+      <div class="stat-note">277 new follows in February</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Views</div>
+      <div class="stat-value">127,232</div>
+      <div class="stat-note">Instagram · February</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Accounts Reached</div>
+      <div class="stat-value gold">30,527</div>
+      <div class="stat-note">+165.3% month over month</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Interactions</div>
+      <div class="stat-value">2,844</div>
+      <div class="stat-note">Likes, comments, shares, saves</div>
+    </div>
+  </div>
+
+  <!-- PLATFORM TABS -->
+  <p class="section-label">Analytics by Platform</p>
+  <h3 class="section-title">February performance breakdown</h3>
+
+  <div class="platform-tabs">
+    <button class="platform-tab active" onclick="switchTab(event, 'instagram')">Instagram</button>
+    <button class="platform-tab" onclick="switchTab(event, 'linkedin')">LinkedIn</button>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="platform-section active" id="tab-instagram">
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Profile Visits</div>
+        <div class="metric-value gold">5,288</div>
+        <div class="metric-change">+263.7%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">External Link Clicks</div>
+        <div class="metric-value">438</div>
+        <div class="metric-change">+154.7%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Net Follower Growth</div>
+        <div class="metric-value gold">239</div>
+        <div class="metric-change">277 follows · 38 unfollows</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Non-Follower Reach</div>
+        <div class="metric-value">65.6%</div>
+        <div class="metric-change">of all accounts reached</div>
+      </div>
+    </div>
+
+    <!-- Interaction breakdown -->
+    <div class="interaction-grid" style="margin-bottom:60px">
+      <div class="interaction-card">
+        <div class="interaction-label">Interactions Breakdown</div>
+        <div class="interaction-items">
+          <div class="interaction-item"><span>Likes</span><strong>719</strong></div>
+          <div class="interaction-item"><span>Comments</span><strong>182</strong></div>
+          <div class="interaction-item"><span>Shares</span><strong>223</strong></div>
+          <div class="interaction-item"><span>Saves</span><strong>34</strong></div>
+          <div class="interaction-item"><span>Reposts</span><strong>21</strong></div>
+        </div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-label">Views by Content Type</div>
+        <div style="margin-top:8px">
+          <div class="content-type-row">
+            <span class="content-type-label">Posts</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:50%"></div></div>
+            <span class="content-pct">50%</span>
+          </div>
+          <div class="content-type-row">
+            <span class="content-type-label">Reels</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:31.2%"></div></div>
+            <span class="content-pct">31.2%</span>
+          </div>
+          <div class="content-type-row">
+            <span class="content-type-label">Stories</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:18.8%"></div></div>
+            <span class="content-pct">18.8%</span>
+          </div>
+        </div>
+        <div class="interaction-label" style="margin-top:24px">Interactions by Content Type</div>
+        <div style="margin-top:8px">
+          <div class="content-type-row">
+            <span class="content-type-label">Posts</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:51.9%"></div></div>
+            <span class="content-pct">51.9%</span>
+          </div>
+          <div class="content-type-row">
+            <span class="content-type-label">Reels</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:40.3%"></div></div>
+            <span class="content-pct">40.3%</span>
+          </div>
+          <div class="content-type-row">
+            <span class="content-type-label">Stories</span>
+            <div class="content-bar-track"><div class="content-bar-fill" style="width:7.8%"></div></div>
+            <span class="content-pct">7.8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Views chart -->
+    <div class="chart-section">
+      <div class="chart-wrap">
+        <div class="chart-title">Instagram Views Growth</div>
+        <div class="chart-sub">October 2024 through February 2025</div>
+        <div class="bar-chart" id="igViewsChart"></div>
+      </div>
+    </div>
+
+    <!-- Top posts -->
+    <div class="top-posts-section">
+      <p class="section-label">Top Performing Posts</p>
+      <h3 class="section-title">Best content by views · February</h3>
+      <div class="top-posts-grid">
+        <div class="top-post-card">
+          <div class="top-post-title">VIP Ticket Giveaway</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Views</span><strong>18,617</strong></div>
+            <div class="top-post-stat"><span>Likes</span><strong>129</strong></div>
+            <div class="top-post-stat"><span>Comments</span><strong>161</strong></div>
+            <div class="top-post-stat"><span>Shares</span><strong>95</strong></div>
+            <div class="top-post-stat"><span>Ad Spend</span><strong>$47.47</strong></div>
+            <div class="top-post-stat"><span>Ad Reach</span><strong>2,627</strong></div>
+          </div>
+        </div>
+        <div class="top-post-card">
+          <div class="top-post-title">Know Before You Go</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Views</span><strong>11,932</strong></div>
+            <div class="top-post-stat"><span>Likes</span><strong>93</strong></div>
+            <div class="top-post-stat"><span>Comments</span><strong>5</strong></div>
+            <div class="top-post-stat"><span>Shares</span><strong>68</strong></div>
+            <div class="top-post-stat"><span>Reposts</span><strong>3</strong></div>
+            <div class="top-post-stat"><span>Saves</span><strong>10</strong></div>
+          </div>
+        </div>
+        <div class="top-post-card">
+          <div class="top-post-title">Recap Photos</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Views</span><strong>10,956</strong></div>
+            <div class="top-post-stat"><span>Likes</span><strong>195</strong></div>
+            <div class="top-post-stat"><span>Comments</span><strong>6</strong></div>
+            <div class="top-post-stat"><span>Shares</span><strong>29</strong></div>
+            <div class="top-post-stat"><span>Saves</span><strong>3</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LINKEDIN -->
+  <div class="platform-section" id="tab-linkedin">
+
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Impressions</div>
+        <div class="metric-value gold">5,720</div>
+        <div class="metric-change">February total</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Reactions</div>
+        <div class="metric-value">158</div>
+        <div class="metric-change">Across all posts</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total Followers</div>
+        <div class="metric-value gold">596</div>
+        <div class="metric-change">+19 new this month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Page Views</div>
+        <div class="metric-value">141</div>
+        <div class="metric-change">75 unique visitors</div>
+      </div>
+    </div>
+
+    <!-- LinkedIn chart -->
+    <div class="chart-section">
+      <div class="chart-wrap">
+        <div class="chart-title">LinkedIn Impressions Growth</div>
+        <div class="chart-sub">October 2024 through February 2025</div>
+        <div class="bar-chart" id="liImprChart"></div>
+      </div>
+    </div>
+
+    <!-- Top LinkedIn posts -->
+    <div class="top-posts-section">
+      <p class="section-label">Top Performing Posts</p>
+      <h3 class="section-title">Best content by impressions · February</h3>
+      <div class="top-posts-grid">
+        <div class="top-post-card">
+          <div class="top-post-title">The Suitcase Experience</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Impressions</span><strong>2,488</strong></div>
+            <div class="top-post-stat"><span>Clicks</span><strong>2,641</strong></div>
+            <div class="top-post-stat"><span>Reactions</span><strong>59</strong></div>
+            <div class="top-post-stat"><span>Reposts</span><strong>3</strong></div>
+          </div>
+        </div>
+        <div class="top-post-card">
+          <div class="top-post-title">Simone Cuccurullo MC Feature</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Impressions</span><strong>1,120</strong></div>
+            <div class="top-post-stat"><span>Clicks</span><strong>91</strong></div>
+            <div class="top-post-stat"><span>Reactions</span><strong>19</strong></div>
+            <div class="top-post-stat"><span>Reposts</span><strong>1</strong></div>
+          </div>
+        </div>
+        <div class="top-post-card">
+          <div class="top-post-title">Children in Need Foundation</div>
+          <div class="top-post-stats">
+            <div class="top-post-stat"><span>Impressions</span><strong>465</strong></div>
+            <div class="top-post-stat"><span>Clicks</span><strong>79</strong></div>
+            <div class="top-post-stat"><span>Reactions</span><strong>15</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTENT STRATEGY REMOVED -->
+
+</section>
+
+<div class="divider"></div>
+
+<div class="more-section">
+  <p class="eyebrow" style="color:var(--warm-gold)">Want to See More?</p>
+  <h2 class="more-title">Results across<br><em>every niche.</em></h2>
+  <p class="more-sub">We work with clients across food and beverage, real estate, nonprofits, professional services, and more. Reach out to see analytics specific to your industry.</p>
+  <a href="index.html#contact" class="btn-outline">Ask for More Examples</a>
+</div>
+
+<footer>
+  <div class="footer-logo">Hannah Mickelson Marketing</div>
+  <div class="footer-copy">© 2026 · Scottsdale, Arizona</div>
+</footer>
+
+
+<script>
+  // Platform tab switching
+  function switchTab(e, platform) {
+    document.querySelectorAll('.platform-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.platform-section').forEach(function(s) { s.classList.remove('active'); });
+    document.getElementById('tab-' + platform).classList.add('active');
+    e.target.classList.add('active');
+  }
+
+  // Bar chart builder
+  function buildChart(id, data) {
+    var chart = document.getElementById(id);
+    if (!chart) return;
+    var maxVal = Math.max.apply(null, data.map(function(d) { return d.val; }));
+    data.forEach(function(d) {
+      var h = Math.max(5, Math.round((d.val / maxVal) * 100));
+      var g = document.createElement('div');
+      g.className = 'bar-group';
+      g.innerHTML = '<div class="bar" style="height:' + h + '%"><span class="bar-val">' + d.val.toLocaleString() + '</span></div><div class="bar-label">' + d.label + '</div>';
+      chart.appendChild(g);
+    });
+  }
+
+  buildChart('igViewsChart', [
+    { label: 'Oct', val: 22000 },
+    { label: 'Nov', val: 25000 },
+    { label: 'Dec', val: 62000 },
+    { label: 'Jan', val: 48000 },
+    { label: 'Feb', val: 127232 }
+  ]);
+
+  buildChart('liImprChart', [
+    { label: 'Oct', val: 420 },
+    { label: 'Nov', val: 310 },
+    { label: 'Dec', val: 5100 },
+    { label: 'Jan', val: 4900 },
+    { label: 'Feb', val: 5720 }
+  ]);
+
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.06 });
+
+  document.querySelectorAll('.stat-card, .metric-card, .top-post-card, .breakdown-card, .interaction-card').forEach(function(el, i) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity 0.5s ease ' + (i * 0.04) + 's, transform 0.5s ease ' + (i * 0.04) + 's';
+    io.observe(el);
+  });
+</script>
+</body>
+</html>
